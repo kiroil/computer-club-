@@ -1,0 +1,134 @@
+namespace kiroil
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            bool isOpen = true;
+
+            int[] clubComputer = { 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1 };
+
+            while (isOpen)
+            {
+                Console.SetCursorPosition(5, 0);
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write("Компьютерный клуб");
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.Write(" BEST SOFT BY KIROIL\n");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.WriteLine("\n1 - все компьютеры \n2 - занять компьютер \n3 - закрыть программу");
+                Console.Write("\nВведите команду: ");
+
+                switch (Convert.ToInt32(Console.ReadLine()))
+                {
+
+                    case 1:
+
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("\n------- [ Список компьютеров ] -------");
+                        Console.ForegroundColor = ConsoleColor.White;
+
+                        for (int i = 0; i < clubComputer.Length; i++)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkGreen;
+                            Console.Write("[·] ");
+                            Console.ForegroundColor = ConsoleColor.White;
+                            if (clubComputer[i] == 1)
+                            {
+                                Console.Write("Компьютер №" + (i + 1));
+                                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                                Console.WriteLine(" свободен.");
+                                Console.ForegroundColor = ConsoleColor.White;
+                            }
+                            else
+                            {
+                                Console.Write("Компьютер №" + (i + 1));
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                Console.WriteLine(" занят.");
+                                Console.ForegroundColor = ConsoleColor.White;
+
+                            }
+                        }
+
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("---------------------------------");
+                        Console.ForegroundColor = ConsoleColor.White;
+
+                        break;
+
+                    case 2:
+                        int userPC;
+                        int userPlace = 1;
+
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine("------- [ Свободные компьютеры ] -------\n");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        for (int i = 0; i < clubComputer.Length; i++)
+                        {
+                            if (clubComputer[i] == 1)
+                            {
+                                Console.Write("  " + "№" + (i + 1) + " ");
+                                Console.ForegroundColor = ConsoleColor.White;
+                            }
+
+                        }
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.Write("\n");
+                        Console.WriteLine("\n----------------------------------------");
+                        Console.ForegroundColor = ConsoleColor.White;
+
+                        Console.Write("\nКакой компьютер вы хотите занять: ");
+                        userPC = Convert.ToInt32(Console.ReadLine()) - 1;
+
+                        if (clubComputer.Length <= userPC || userPC < 0)
+                        {
+                            Console.WriteLine("\nТакого компьютера нет.");
+                            break;
+                        }
+                        if (clubComputer[userPC] < userPlace)
+                        {
+                            Console.WriteLine("\nКомпьютер уже занят");
+
+                            break;
+
+                        }
+
+                        clubComputer[userPC] -= userPlace;
+                        Console.WriteLine("\nБронирование компьютера №" + (userPC + 1) + " успешно.");
+                        break;
+
+                    case 3:
+                        string userExit;
+                        Console.Clear();
+                        Console.Write("Вы действительно хотите выйти (да, нет): ");
+                        userExit = Console.ReadLine();
+                        if (userExit == "да")
+                        {
+                            Console.Clear();
+                            Console.WriteLine("\nЖдем вас вновь");
+                            isOpen = false;
+                            break;
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("\nМы рады что вы остаетесь! :)");
+                            break;
+                        }
+
+
+
+                }
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\nНажмите любую клавишу для продолжения...");
+                Console.ForegroundColor = ConsoleColor.White;
+
+                Console.ReadKey();
+                Console.Clear();
+            }
+        }
+    }
+}
